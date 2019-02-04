@@ -23,19 +23,19 @@
                10                  PIC X(05)   VALUE SPACES.            
               working-storage section.                                  
                10                  PIC X(05)   VALUE SPACES.            
-              01  WS-STUFF.                                             
+       01  WS-STUFF.                                             
                10                  PIC X(04)   VALUE SPACES.            
-                  05  WS-INREC.                                         
+           05  WS-INREC.                                         
                10                  PIC X(22)   VALUE SPACES.            
       *       copy DEFINP.                                              
       *        place to define output record                            
       *           05  WS-DETAIL.                                        
                WS-COLHDR.                                               
-                      10                  PIC X       VALUE SPACES.     
+               10                  PIC X       VALUE SPACES.     
                10                  PIC X(11)   VALUE 'PART NUMBER'.     
-                      10 D-PART-NUM       PIC X(09).                    
+               10 D-PART-NUM       PIC X(09).                    
                10                  PIC X(30)   VALUE 'DESCRIPTION'.     
-                      10                  PIC X(06)   VALUE SPACES.     
+               10                  PIC X(06)   VALUE SPACES.     
                10                  PIC X(10)   VALUE 'UNIT PRICE'.      
                10                  PIC X(03)   VALUE SPACES.            
                10                  PIC X(07)   VALUE 'ON HAND'.         
@@ -65,34 +65,40 @@
                                                                         
        procedure division using PARM-REQUEST PARM-INREC PARM-OUTREC.    
            EVALUATE PARM-REQUEST                                        
-              WHEN "1"                                                  
+              WHEN "1"
+                 PERFORM FUNCT-CODE-1-INPUT
+              WHEN "2"
+                 PERFORM FUNCT-CODE-2-HEAEDERS
+              WHEN "3" 
+                 PERFORM FUNCT-CODE-3-BLANKS
+            END-EVALUATE.
+            GOBACK
+            .
+       FUNCT-CODE-1-INPUT.
+            MOVE PARM-INREC TO WS-INREC                            
+            DISPLAY WS-INREC                                       
+            MOVE I-PARTNO   TO D-PART-NUM                          
+            MOVE I-DESCR    TO D-DESCRIPTION                       
+            MOVE I-UNITPR   TO D-UNIT-PRICE                        
+            MOVE I-QOH      TO D-QUANT-ON-HAND                     
+            MOVE I-QOO      TO D-QUANT-ON-ORDER                    
+      ***   MOVE I-RDRLVL   TO D-REORDER-LEVEL                     
                                                                         
-                 MOVE PARM-INREC TO WS-INREC                            
-                 DISPLAY WS-INREC                                       
-                 MOVE I-PARTNO   TO D-PART-NUM                          
-                 MOVE I-DESCR    TO D-DESCRIPTION                       
-                 MOVE I-UNITPR   TO D-UNIT-PRICE                        
-                 MOVE I-QOH      TO D-QUANT-ON-HAND                     
-                 MOVE I-QOO      TO D-QUANT-ON-ORDER                    
-      ***        MOVE I-RDRLVL   TO D-REORDER-LEVEL                     
-                                                                        
-                 IF I-QOH + I-QOO < I-RDRLVL                            
-                    MOVE '*'     TO D-REORDER-FLAG        
-                 ELSE                                     
-                    MOVE ' '     TO D-REORDER-FLAG        
-                 END-IF                                   
+            IF I-QOH + I-QOO < I-RDRLVL                            
+                MOVE '*'     TO D-REORDER-FLAG        
+            ELSE                                     
+                MOVE ' '     TO D-REORDER-FLAG        
+            END-IF                                   
       ***                                                 
-                 COMPUTE D-ITEM-VALUE = I-QOH * I-UNITPR  
+            COMPUTE D-ITEM-VALUE = I-QOH * I-UNITPR  
                                                           
-                 MOVE I-OLDPTNO  TO D-OLD-PART-NUM        
-                 MOVE I-ITEMCAT  TO D-ITEM-CATEGORY       
-                 MOVE WS-DETAIL  TO PARM-OUTREC           
-                                                          
-              WHEN "2"                                    
-                 MOVE WS-COLHDR TO PARM-OUTREC            
-                                                          
-              WHEN "3"                                    
-                 MOVE SPACES TO PARM-OUTREC               
-           END-EVALUATE.                                  
-           goback                                         
-           .                                              
+            MOVE I-OLDPTNO  TO D-OLD-PART-NUM        
+            MOVE I-ITEMCAT  TO D-ITEM-CATEGORY       
+            MOVE WS-DETAIL  TO PARM-OUTREC           
+            .                                         
+       FUNCT-CODE-2-HEADERS.                                     
+            MOVE WS-COLHDR TO PARM-OUTREC            
+            .                                         
+       FUNCT-CODE-3-BLANKS                                    
+            MOVE SPACES TO PARM-OUTREC                                                          
+            .                                              
