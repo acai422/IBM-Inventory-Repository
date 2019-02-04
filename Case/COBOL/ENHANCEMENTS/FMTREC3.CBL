@@ -87,54 +87,70 @@
                                                                       
        procedure division using PARM-REQUEST PARM-INREC PARM-OUTREC.  
            EVALUATE PARM-REQUEST                                      
-              WHEN "1"                                                
-                                                                      
-                 MOVE PARM-INREC TO WS-INREC                          
-                 DISPLAY WS-INREC                                     
-                 MOVE I-PARTNO   TO D-PART-NUM                        
-                 MOVE I-DESCR    TO D-DESCRIPTION                     
-                 MOVE I-UNITPR   TO D-UNIT-PRICE                      
-                 MOVE I-QOH      TO D-QUANT-ON-HAND                   
-                 MOVE I-QOO      TO D-QUANT-ON-ORDER                  
-      ***        MOVE I-RDRLVL   TO D-REORDER-LEVEL                   
-                                                                      
-                 IF I-QOH + I-QOO < I-RDRLVL                          
-                    MOVE '*'     TO D-REORDER-FLAG                    
-                    ADD 1 TO FOOT-COUNT                               
-                 ELSE                                                 
-                    MOVE ' '     TO D-REORDER-FLAG                    
-                 END-IF                                               
-                                                                      
-                 COMPUTE ITEM-VALUE-HOLDER = I-QOH * I-UNITPR         
-                 MOVE    ITEM-VALUE-HOLDER TO D-ITEM-VALUE            
-                                                                      
-                 ADD     ITEM-VALUE-HOLDER TO PAGE-TOTAL-HOLDER       
-                                                                      
-                 MOVE    PAGE-TOTAL-HOLDER TO PAGE-TOTAL              
-                                                                      
-                 MOVE I-OLDPTNO  TO D-OLD-PART-NUM                    
-                 MOVE I-ITEMCAT  TO D-ITEM-CATEGORY                   
-                 MOVE WS-DETAIL  TO PARM-OUTREC                       
-                                                                      
-              WHEN "2"                                                
-                  MOVE WS-COLHDR TO PARM-OUTREC                        
-                                                                       
-               WHEN "3"                                                
-                  MOVE SPACES TO PARM-OUTREC                           
-                                                                       
-               WHEN "4"                                                
-                  ADD 1 TO O-PAGE-NUMBER                               
-                  MOVE O-TITLE      TO EXTERN-TITLE                    
-                  MOVE TITLE-HEADER TO PARM-OUTREC                     
-                                                                       
-               WHEN "5"                                                
-                  MOVE BOTTOM-FOOTER TO PARM-OUTREC                    
-                  INITIALIZE FOOT-COUNT                                
-                                                                       
-               WHEN "6"                                                
-                  MOVE FOOTER-TOTALS TO PARM-OUTREC                    
-                  INITIALIZE PAGE-TOTAL-HOLDER                         
-                                                                       
-             END-EVALUATE.                                             
-             goback                                                    
-             .                                                         
+              WHEN "1" 
+                 PERFORM FUNCT-CODE-1-INPUT
+              WHEN "2" 
+                 PERFORM FUNCT-CODE-2-HEADERS
+              WHEN "3" 
+                 PERFORM FUNCT-CODE-3-BLANKS 
+              WHEN "4" 
+                 PERFORM FUNCT-CODE-4-PAGENUM
+              WHEN "5" 
+                 PERFORM FUNCT-CODE-5-FLAG-COUNT
+              WHEN "6" 
+                 PERFORM FUNCT-CODE-6-PAGE-TOTAL
+              END-EVALUATE.
+              GOBACK 
+              .
+      
+           FUNCT-CODE-1-INPUT.  
+                MOVE PARM-INREC TO WS-INREC                          
+                DISPLAY WS-INREC                                     
+                MOVE I-PARTNO   TO D-PART-NUM                        
+                MOVE I-DESCR    TO D-DESCRIPTION                     
+                MOVE I-UNITPR   TO D-UNIT-PRICE                      
+                MOVE I-QOH      TO D-QUANT-ON-HAND                   
+                MOVE I-QOO      TO D-QUANT-ON-ORDER                  
+      ***       MOVE I-RDRLVL   TO D-REORDER-LEVEL                   
+                                                                     
+                IF I-QOH + I-QOO < I-RDRLVL                          
+                   MOVE '*'     TO D-REORDER-FLAG                    
+                   ADD 1 TO FOOT-COUNT                               
+                ELSE                                                 
+                   MOVE ' '     TO D-REORDER-FLAG                    
+                END-IF                                               
+                                                                     
+                COMPUTE ITEM-VALUE-HOLDER = I-QOH * I-UNITPR         
+                MOVE    ITEM-VALUE-HOLDER TO D-ITEM-VALUE            
+                                                                     
+                ADD     ITEM-VALUE-HOLDER TO PAGE-TOTAL-HOLDER       
+                                                                     
+                MOVE    PAGE-TOTAL-HOLDER TO PAGE-TOTAL              
+                                                                     
+                MOVE I-OLDPTNO     TO D-OLD-PART-NUM                    
+                MOVE I-ITEMCAT     TO D-ITEM-CATEGORY                   
+                MOVE WS-DETAIL     TO PARM-OUTREC                       
+                . 
+      
+            FUNCT-CODE-2-HEADERS.                                    
+                 MOVE WS-COLHDR    TO PARM-OUTREC                        
+                 .
+      
+            FUNCT-CODE-3-BLANKS.                                  
+                 MOVE SPACES       TO PARM-OUTREC                           
+                 .
+      
+            FUNCT-CODE-4-PAGENUM.                                
+                 ADD 1 TO O-PAGE-NUMBER                               
+                 MOVE O-TITLE      TO EXTERN-TITLE                    
+                 MOVE TITLE-HEADER TO PARM-OUTREC                     
+                 .
+      
+            FUNCT-CODE-5-FLAG-COUNT.                                 
+                 MOVE BOTTOM-FOOTER TO PARM-OUTREC                    
+                 INITIALIZE FOOT-COUNT                                
+                 .                                                     
+            FUNCT-CODE-6-PAGE-TOTAL.                                 
+                 MOVE FOOTER-TOTALS TO PARM-OUTREC                    
+                 INITIALIZE PAGE-TOTAL-HOLDER                         
+                 .                                                      
