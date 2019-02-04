@@ -37,42 +37,42 @@
                10 D-DESCRIPTION    PIC X(30).                           
                10                  PIC X(04)  VALUE SPACES.             
                10 D-UNIT-PRICE     PIC $$$9.99.                         
-                10                  PIC X(07)  VALUE SPACES.          
-                10 D-QUANT-ON-HAND  PIC 09(05).                       
-                10                  PIC X(07)  VALUE SPACES.          
-                10 D-QUANT-ON-ORDER PIC 09(02).                       
-                10                  PIC X(02)  VALUE SPACES.          
-                10 D-REORDER-LEVEL  PIC 09(02).                       
-                10 D-REORDER-FLAG   PIC X(01).                        
-                10                  PIC X(05)  VALUE SPACES.          
-                10 D-OLD-PART-NUM   PIC X(09).                        
-                10                  PIC X(05)  VALUE SPACES.          
-                10 D-ITEM-CATEGORY  PIC X(10).                        
-                10                  PIC X(04)  VALUE SPACES.          
-                10 D-ITEM-VALUE     PIC $$,$$$,999.99.                
+               10                  PIC X(07)  VALUE SPACES.          
+               10 D-QUANT-ON-HAND  PIC 09(05).                       
+               10                  PIC X(07)  VALUE SPACES.          
+               10 D-QUANT-ON-ORDER PIC 09(02).                       
+               10                  PIC X(02)  VALUE SPACES.          
+               10 D-REORDER-LEVEL  PIC 09(02).                       
+               10 D-REORDER-FLAG   PIC X(01).                        
+               10                  PIC X(05)  VALUE SPACES.          
+               10 D-OLD-PART-NUM   PIC X(09).                        
+               10                  PIC X(05)  VALUE SPACES.          
+               10 D-ITEM-CATEGORY  PIC X(10).                        
+               10                  PIC X(04)  VALUE SPACES.          
+               10 D-ITEM-VALUE     PIC $$,$$$,999.99.                
        ***                                                            
        *** good place to define output record                         
        ***                                                            
-            05  WS-COLHDR.                                            
-                10                  PIC X      VALUE SPACES.          
-                10                  PIC X(11)  VALUE 'PART NUMBER'.   
-                10                  PIC X(07)  VALUE SPACES.          
-                10                  PIC X(30)  VALUE 'DESCRIPTION'.   
-                10                  PIC X(01)  VALUE SPACES.          
-                10                  PIC X(10)  VALUE 'UNIT PRICE'.    
-                10                  PIC X(03)  VALUE SPACES.          
-                10                  PIC X(07)  VALUE 'ON HAND'.       
-                10                  PIC X(04)  VALUE SPACES.          
-                10                  PIC X(08)  VALUE 'ON ORDER'.      
-                10                  PIC X(02)  VALUE SPACES.          
-       ***      10                  PIC X(11)  VALUE 'REORDER LVL'.   
-                10                  PIC X(03)  VALUE 'FLG'.           
-                10                  PIC X(03)  VALUE SPACES.          
-                10                  PIC X(12)  VALUE 'OLD PART NUM'.  
-                10                  PIC X(02)  VALUE SPACES.          
-                10                  PIC X(13)  VALUE 'ITEM CATEGORY'. 
-                10                  PIC X(06)  VALUE SPACES.          
-                10                  PIC X(10)  VALUE 'ITEM VALUE'.    
+           05  WS-COLHDR.                                            
+               10                  PIC X      VALUE SPACES.          
+               10                  PIC X(11)  VALUE 'PART NUMBER'.   
+               10                  PIC X(07)  VALUE SPACES.          
+               10                  PIC X(30)  VALUE 'DESCRIPTION'.   
+               10                  PIC X(01)  VALUE SPACES.          
+               10                  PIC X(10)  VALUE 'UNIT PRICE'.    
+               10                  PIC X(03)  VALUE SPACES.          
+               10                  PIC X(07)  VALUE 'ON HAND'.       
+               10                  PIC X(04)  VALUE SPACES.          
+               10                  PIC X(08)  VALUE 'ON ORDER'.      
+               10                  PIC X(02)  VALUE SPACES.          
+       ***     10                  PIC X(11)  VALUE 'REORDER LVL'.   
+               10                  PIC X(03)  VALUE 'FLG'.           
+               10                  PIC X(03)  VALUE SPACES.          
+               10                  PIC X(12)  VALUE 'OLD PART NUM'.  
+               10                  PIC X(02)  VALUE SPACES.          
+               10                  PIC X(13)  VALUE 'ITEM CATEGORY'. 
+               10                  PIC X(06)  VALUE SPACES.          
+               10                  PIC X(10)  VALUE 'ITEM VALUE'.    
                                                                       
        ***                                                            
        *** good place to define column header                         
