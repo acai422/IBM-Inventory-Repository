@@ -1,0 +1,12 @@
+//TSOUT01A JOB 3OF36G100000DD,'TEAM XX',MSGLEVEL=(1,1),     
+// NOTIFY=&SYSUID,MSGCLASS=Q,REGION=0M,CLASS=E,TIME=(,5)    
+//*                                                         
+//   JCLLIB ORDER=INSTN03.CASE.LIBRARY                      
+//*                                                         
+//STEP1    EXEC PROC=ASMCL,PROG=SNAPPER                     
+//*                                                         
+//         IF RC<4 THEN                                     
+//STEP2    EXEC PROC=ASMCLG,PROG=TESTSNAP                   
+//GO.INFILE DD DSN=INSTN03.CASE.INPUTA,DISP=SHR             
+//GO.OUTFILE DD SYSOUT=*,OUTLIM=1000                        
+//         ENDIF                                            

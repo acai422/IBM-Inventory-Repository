@@ -1,0 +1,7 @@
+//TSOUT01A JOB 3OF36G100000DD,'TEAM XX',MSGLEVEL=(1,1),      
+// NOTIFY=&SYSUID,MSGCLASS=Q,REGION=0M,CLASS=E,TIME=(,5)     
+//*                                                          
+//   JCLLIB ORDER=INSTN03.CASE.LIBRARY                       
+//*                                                          
+//STEP1    EXEC PROC=ASMCL,PROG=FMTREC2                      
+//*                                                          
