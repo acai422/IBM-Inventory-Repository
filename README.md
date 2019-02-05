@@ -1,5 +1,3 @@
-IBM INVENTORY REPOSITORY - WIP
-
 # IBM COBOL CASE STUDY ##
 ## Purpose: A Case Study developed by Hunter Cobb from IBM to test our COBOL knowledge 
 ### Task: An organization has a sequential file that is the master file for items in the company's inventory.
